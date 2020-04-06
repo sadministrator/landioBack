@@ -19,12 +19,15 @@ server.listen(PORT, () => {
 
 // Websocket handlers
 io.on('connection', (socket) => {
-    console.log('New client connected.');
-    setInterval(() => {
-        welcomeMessage(socket)
-    }, 1000);
-    socket.on('disonnect', () => {
-        console.log('Client disconnected.')
+    console.log('User', socket.id, 'connected.');
+
+    socket.on('chat message', (message) => {
+        console.log(message);
+        io.emit('chat message', message);
+    });
+
+    socket.once('disconnect', () => {
+        console.log('User disconnected.');
     });
 });
 

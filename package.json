@@ -1,5 +1,5 @@
 {
-  "name": "backlandio",
+  "name": "landioback",
   "version": "0.1.0",
   "description": "The backend for landio built with nodejs and express.",
   "main": "index.js",
