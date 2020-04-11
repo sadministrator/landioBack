@@ -23,18 +23,15 @@ io.on('connection', (socket) => {
 
     socket.on('chat message', (message) => {
         console.log(message);
-        io.emit('chat message', message);
+        io.in(message.room).emit('chat message', message);
+    });
+
+    socket.on('join room', (message) => {
+        console.log(message);
+        socket.join(message.room);
     });
 
     socket.once('disconnect', () => {
         console.log('User disconnected.');
     });
 });
-
-const welcomeMessage = async (socket: socketIO.Socket) => {
-    try {
-        socket.emit('message', 'whassup bitches.');
-    } catch (error) {
-        console.error('Error: ', error);
-    }
-}
